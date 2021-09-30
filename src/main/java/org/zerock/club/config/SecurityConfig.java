@@ -32,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/sample/all").permitAll()//권한 조건만 설정
                 .antMatchers("/sample/member").hasRole("USER"); //Url에 대한 설정 user상속값과 일치해야함
         http.formLogin();
+        http.csrf().disable();
+        http.logout();
     }
 
     //wat을
