@@ -18,15 +18,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(); //spring bean을 하나 만든 것과 같음, password를 implement함 인터페이스로 넘어감(형변환)서로 관련이 없는데도 불구하고 연관되지 않은 클래스를 연결해줌 interface -> 독립적으로 사용가능
     }
 
-    //자주 쓰이진 않음
+ /*   //자주 쓰이진 않음
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user1")
                 .password("$2a$10$qdPCUyA42QYY025yebqJ6uKeX7WHkHZBa4O4pUvk4xZxWDR4OhWVS")
                 .roles("USER"); //USER라는 권한을 임의로 만든 것임
-    }
+    }*/
 
-    //url에 대해서 선별,
+    //url에 대해서 선별
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/sample/all").permitAll()//권한 조건만 설정
@@ -36,9 +36,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout();
     }
 
-    //wat을
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-    }
 }

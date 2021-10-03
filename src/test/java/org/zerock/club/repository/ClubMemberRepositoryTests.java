@@ -20,7 +20,7 @@ class ClubMemberRepositoryTests {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /*@Test
+/*    @Test
     public void insertDummies(){
         IntStream.rangeClosed(1,100).forEach(i -> {
             *//*1-80까지는 USER만 지정
@@ -46,7 +46,7 @@ class ClubMemberRepositoryTests {
     }*/
 
     @Test
-    public void testRead(){
+    public void testRead(){ //제너릭 장점: 1.코드가 간결해지고 2.자동 형변환이 됨
         Optional<ClubMember> result = repository.findByEmail("user95@ds.com", false);
         ClubMember clubMember = result.get();
         System.out.println(clubMember); //clubmember에 tostring으로 나오기 때문에 문자열로 나옴
