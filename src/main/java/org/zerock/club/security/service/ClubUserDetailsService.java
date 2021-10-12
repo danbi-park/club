@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.club.entity.ClubMember;
 import org.zerock.club.repository.ClubMemberRepository;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class ClubUserDetailsService implements UserDetailsService {
 
     private final ClubMemberRepository clubMemberRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
 //userdetails와 jpa 둘이 매칭을 시켜주려면 service에 db를 연결시켜야함 !!!
 //1. repository를 jpa를 상속해서 만들고 jpa를 이용해서 db를 연결시킨다. userdetails서비스 이용
