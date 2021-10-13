@@ -23,7 +23,8 @@ public class SampleController {
 
 
     //@PreAuthorize("principal.username == #clubAuthMember.username")
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @GetMapping("/member")
     public void exMember(@AuthenticationPrincipal ClubAuthMemberDTO clubAuthMember){
         log.info("exMember...");
