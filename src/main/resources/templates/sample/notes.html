@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>note</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var jwtValue = [[${jwtValue}]]; //inline방식으로 받음 이 값을  Bearer 뒤에 붙여줄 것임
+            $('.btn').click(function(){
+                $.ajax({
+                    beforeSend: function(request){
+                        request.setRequestHeader("Authorization", 'Bearer ' + jwtValue); //jwtValue는 JWT값
+                    },
+                    url: 'http://localhost:8080/notes/all',
+                    data: {email: 'user10@ds.com'}, //데이터를 객체로 넣어줌
+                    dataType: "json",
+                    success: function(arr){console.log(arr)}
+                }); //ajax
+            }); //btn
+        }); //ready
+    </script>
+</head>
+<body>
+    <button class="btn">Ajax 전송</button>
+</body>
+</html>
