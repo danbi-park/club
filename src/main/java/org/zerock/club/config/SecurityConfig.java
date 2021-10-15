@@ -35,8 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 /*        http.authorizeRequests()
                 .antMatchers("/sample/all").permitAll()
                 .antMatchers("/sample/member").hasRole("USER");*/
-        http.formLogin();
+        //http.formLogin(); //자체적으로 만들어진 로그인 페이지가 열림
+        http.formLogin().loginPage("/sample/login").loginProcessingUrl("/login")
+                .successHandler(successHandler())
+                .failureUrl("/sample/login?error");
         http.csrf().disable();
+        http.logout();
         http.oauth2Login().successHandler(successHandler());
         http.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(userDetailsService); //7일동안 저장됨
         http.addFilterBefore(apiCheckFilter(), UsernamePasswordAuthenticationFilter.class);

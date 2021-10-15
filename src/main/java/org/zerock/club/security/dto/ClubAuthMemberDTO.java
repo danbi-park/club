@@ -21,10 +21,7 @@ public class ClubAuthMemberDTO extends User implements OAuth2User {
     private String password;
     private String name;
     private boolean fromSocial;
-    private Map<String, Object> attr;
-
-
-
+    private Map<String, Object> attr; //google로부터 받아오는 정보 email, email_verified, picture 등
 
     public ClubAuthMemberDTO(String username, String password, boolean fromSocial,
                              Collection<? extends GrantedAuthority> authorities, Map<String, Object> attr) {

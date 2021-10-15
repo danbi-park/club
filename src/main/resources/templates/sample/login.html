@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Log-in</title>
+
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .loginBox {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -150px;
+      margin-top: -75px;
+    }
+
+    fieldset {
+      background: #fbf3c5;
+      width: 300px;
+      height: 200px;
+      border-radius: 20px;
+      border: #e8db90 solid 2px;
+    }
+
+    legend {
+      text-align: center;
+      font-weight: bold;
+      font-size: 15pt;
+      color: #555555;
+    }
+
+
+    td {
+      width: 80px;
+      text-align: center;
+      font-weight: 550;
+      margin-bottom: 5px;
+      display: inline-block;
+      color: #555555;
+    }
+
+    table {
+      margin: 15px 5px;
+    }
+
+    input {
+      border-radius: 30px;
+      border: dashed #ffc9c9 2px;
+    }
+
+    button {
+      width: 70px;
+      padding: 4px;
+      background: #ffc9c9;
+      box-shadow: 1px 2px 3px rgb(147, 147, 147);
+      border-radius: 20px;
+      border: solid 2px rgba(245, 153, 153, 0.86);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgb(75, 73, 73);
+    }
+
+    button:hover {
+      background: rgba(245, 153, 153, 0.86);
+      border-radius: 20px;
+      border: solid 2px #ffc9c9;
+      color: black;
+    }
+
+    a{
+      font-size:10px;
+      display:block;
+      text-align:right;
+      color:rgb(173, 134, 255);
+      margin:10px;
+      text-decoration:none;
+    }
+
+  </style>
+  <script>
+    window.onload = function() {
+      document.getElementById('btnSubmit').onclick = function() {
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+
+        if (username == undefined || username == '') {
+          alert('아이디를 확인해주세요');
+          document.getElementById('username').focus();
+          return;
+        }
+        if (password == undefined || password == '') {
+          alert('비밀번호를 확인해주세요');
+          document.getElementById('password').focus();
+          return;
+        }
+        document.frm.submit();
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+
+<div th:fragment="content">
+    <form name="frm" style="position:absolute" class="loginBox" action="/login" method="post">
+
+      <fieldset>
+        <legend>Log-in</legend>
+        <table>
+
+          <tr>
+            <td colspan="2" style="height:20px; color:red;">
+              <span th:if="${param.error}">아이디와 비밀번호를 확인해주세요.</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" style="height:20px; color:red;">
+              <span th:if="${param.logout}">로그아웃 되었습니다.</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="username">ID: </label></td>
+            <td><input id="username" type="text" name="username" value=""></td>
+          </tr>
+
+          <tr>
+            <td><label for="password">Pw: </label></td>
+            <td><input id="password" type="text" name="password" value=""></td>
+          </tr>
+
+          <!-- 여기서 자동으로 토큰이 생성됨 -->
+<!--          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+
+          <tr>
+            <td></td>
+            <td><button id="btnSubmit" class="btn" type="button" name="button">LOGIN</button></td>
+            <td><button class="btn" type="reset" name="button">RESET</button></td>
+          </tr>
+
+        </table>
+      </fieldset>
+<!--      <a href="signin.html">회원가입 하러가기🏃‍♂️</a>-->
+
+      <table class="table table-striped">
+        <tbody>
+        <tr>
+          <td><a href="/oauth2/authorization/google">Google</a></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+    </form>
+  </div>
+
+</body>
+</html>
